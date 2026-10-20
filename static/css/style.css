@@ -79,6 +79,93 @@ img.resize {
   margin-top: 1.5em;
 }
 
+/* halloween dark mode (index) */
+body.halloween {
+  --main-font-color: #e8e6e3;
+  --main-button-color: #b5b5b5;
+  --spooky-red: #ff4d3d;
+  background: radial-gradient(ellipse at top, #333333 0%, #1e1e1e 60%, #121212 100%) fixed;
+  color: var(--main-font-color);
+  min-height: 100vh;
+}
+
+.halloween .info b {
+  color: var(--main-hover-color);
+}
+
+.spooky {
+  color: var(--spooky-red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  animation: flicker 4s infinite;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spooky { animation: none; }
+}
+
+img.poster {
+  max-width: min(90vw, 420px);
+  height: auto;
+  margin: 1.5em 0;
+  border: 1px solid #555555;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  transition: transform 0.2s ease-in-out;
+}
+
+img.poster:hover {
+  transform: scale(1.02) rotate(-0.5deg);
+}
+
+.signup {
+  display: inline-block;
+  padding: 0.6em 1.6em;
+  font-size: 1.4rem;
+  color: #121212;
+  background: var(--main-hover-color);
+  border-radius: 2em;
+  transition: all 0.2s ease-in-out;
+}
+
+.signup:hover,
+.signup:focus {
+  color: #121212;
+  text-decoration: none;
+  background: #ff8a3d;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin: 2em 0 0.5em;
+  font-size: 1.5rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid #555555;
+}
+
+.coc {
+  display: inline-block;
+  margin: 1.5em 0;
+  font-size: 1.1rem;
+  color: var(--main-button-color);
+  transition: color 0.2s ease-in-out;
+}
+
+.coc:hover {
+  color: var(--main-hover-color);
+}
+
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait),
   (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .top-page-margin {
