@@ -79,41 +79,84 @@ img.resize {
   margin-top: 1.5em;
 }
 
-/* halloween dark mode (index) */
-body.halloween {
-  --main-font-color: #e8e6e3;
-  --main-button-color: #b5b5b5;
-  --spooky-red: #ff4d3d;
-  background: radial-gradient(ellipse at top, #333333 0%, #1e1e1e 60%, #121212 100%) fixed;
+/* christmas theme (index), colors taken from the meetup poster */
+body.christmas {
+  --main-font-color: #f3ead3;
+  --main-button-color: #c9bfa5;
+  --main-hover-color: #d9b35c;
+  --xmas-red: #e0412f;
+  --xmas-gold: #d9b35c;
+  background: radial-gradient(ellipse at top, #1f3a2c 0%, #12261c 55%, #0b1812 100%) fixed;
   color: var(--main-font-color);
   min-height: 100vh;
 }
 
-.halloween .info b {
-  color: var(--main-hover-color);
+/* gentle snowfall: two tiled layers of dots drifting down */
+body.christmas::before,
+body.christmas::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 90px 140px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(3px 3px at 160px 60px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 230px 190px, rgba(255, 255, 255, 0.5), transparent);
+  background-size: 260px 220px;
+  animation: snow 18s linear infinite;
 }
 
-.spooky {
-  color: var(--spooky-red);
+body.christmas::after {
+  background-size: 380px 330px;
+  opacity: 0.6;
+  animation-duration: 30s;
+}
+
+.christmas .container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes snow {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 40px 660px, 40px 660px, 40px 660px, 40px 660px; }
+}
+
+.christmas .info b {
+  color: var(--xmas-gold);
+}
+
+.festive {
+  color: var(--xmas-red);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  animation: flicker 4s infinite;
+  animation: twinkle 3s ease-in-out infinite;
 }
 
-@keyframes flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-  20%, 24%, 55% { opacity: 0.4; }
+@keyframes twinkle {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: 0 0 12px rgba(224, 65, 47, 0.7); }
+}
+
+.talk {
+  color: var(--main-button-color);
+  font-size: 1.1rem;
+  margin-top: 1em;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spooky { animation: none; }
+  .festive,
+  body.christmas::before,
+  body.christmas::after { animation: none; }
 }
 
 img.poster {
   max-width: min(90vw, 420px);
   height: auto;
   margin: 1.5em 0;
-  border: 1px solid #555555;
+  border: 1px solid var(--xmas-gold, #555555);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   transition: transform 0.2s ease-in-out;
 }
@@ -126,17 +169,17 @@ img.poster:hover {
   display: inline-block;
   padding: 0.6em 1.6em;
   font-size: 1.4rem;
-  color: #121212;
-  background: var(--main-hover-color);
+  color: #fff;
+  background: var(--xmas-red, var(--main-hover-color));
   border-radius: 2em;
   transition: all 0.2s ease-in-out;
 }
 
 .signup:hover,
 .signup:focus {
-  color: #121212;
+  color: #fff;
   text-decoration: none;
-  background: #ff8a3d;
+  background: #f25a45;
 }
 
 .divider {
@@ -151,7 +194,7 @@ img.poster:hover {
 .divider::after {
   content: "";
   flex: 1;
-  border-top: 1px solid #555555;
+  border-top: 1px solid var(--xmas-gold, #555555);
 }
 
 .coc {
